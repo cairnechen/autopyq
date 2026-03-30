@@ -1,5 +1,6 @@
 # Claude Code local settings
 .claude/settings.local.json
+AGENTS.md
 
 # Template capture temp files
 .tmp_template_capture/

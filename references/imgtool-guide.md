@@ -133,7 +133,7 @@ Required inputs:
 
 - the input image
 - a narrowed `--region`
-- the corresponding `*_bg_template.png` as the color-pattern reference
+- the corresponding `*_bg_reference.png` as the color-pattern reference
 
 Example for `pyq3`:
 
@@ -141,7 +141,7 @@ Example for `pyq3`:
 ./assets/imgtool.exe find-text-bbox `
   --in ./.tmp_template_capture/<run-id>/pyq3_region.png `
   --region 0,0,300,90 `
-  --template ./assets/pyq3_bg_template.png `
+  --template ./assets/pyq3_bg_reference.png `
   --padding 0
 ```
 
@@ -165,5 +165,5 @@ If `./assets/imgtool.exe` is unavailable, use the same commands through Python:
 ```powershell
 python ./scripts/imgtool.py info --in ...
 python ./scripts/imgtool.py find-component --in ... --region ... --polarity dark --min-area 20 --select largest
-python ./scripts/imgtool.py find-text-bbox --in ... --region ... --template ./assets/pyq3_bg_template.png --padding 0
+python ./scripts/imgtool.py find-text-bbox --in ... --region ... --template ./assets/pyq3_bg_reference.png --padding 0
 ```

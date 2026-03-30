@@ -9,7 +9,7 @@ For detailed `imgtool` usage, also read `./references/imgtool-guide.md`.
 - Capture runner: `./assets/wechat_moments_capture_reference.exe`
 - Programmatic crop tool: `./assets/imgtool.exe` (fallback: `python ./scripts/imgtool.py`)
 - Config: `./assets/config.ini`
-- Default template references: `./assets/pyq1_bg_template.png`, `./assets/pyq2_bg_template.png`, `./assets/pyq3_bg_template.png`, `./assets/pyq4_bg_template.png`
+- Default template references: `./assets/pyq1_bg_reference.png`, `./assets/pyq2_bg_reference.png`, `./assets/pyq3_bg_reference.png`, `./assets/pyq4_bg_reference.png`
 - Runtime templates to refresh: `./assets/pyq1_bg.png`, `./assets/pyq2_bg.png`, `./assets/pyq3_bg.png`, `./assets/pyq4_bg.png`
 - Preserve `./assets/pyq1_full.png` as the clean full-button source for `pyq1` after a successful capture.
 
@@ -79,7 +79,7 @@ The runner saves full-window screenshots with fixed names under `--output-dir`:
 - Run the capture runner with `--target moments_button` and `--window-state-file <run-window-state.ini>`.
 - Inspect `capture_moments_button.png`.
 - Extract the left navigation rail from the WeChat window screenshot. Its width must be at least 15% of the image width.
-- Use `./assets/pyq1_bg_template.png` only as a reference for what the correct sidebar icon should look like.
+- Use `./assets/pyq1_bg_reference.png` only as a reference for what the correct sidebar icon should look like.
 - Locate the 朋友圈 icon candidate inside that navigation-rail crop, confirm it, and temporarily save that candidate crop (cropped from the navigation-rail image) for the remaining `pyq1` steps.
 - Check visually whether that candidate has a red badge on the icon itself, especially near the actual icon's top-right area.
 - If a badge is present, stop and ask the user to clear the badge, then repeat this step.
@@ -89,7 +89,7 @@ The runner saves full-window screenshots with fixed names under `--output-dir`:
 - Save the result as a temporary file, not directly as `pyq1_full.png`.
 - Run `imgtool find-component --polarity dark` on the temporary file as a heuristic check. If the result suggests that the icon is materially off-center, adjust and re-crop, but treat visual centering as the authoritative check.
 - Only after verification passes, save as `./assets/pyq1_full.png`.
-- Before cropping the final runtime template, use visual inspection to verify that `./assets/pyq1_full.png` is correct by reading it together with `./assets/pyq1_bg_template.png` as a visual reference.
+- Before cropping the final runtime template, use visual inspection to verify that `./assets/pyq1_full.png` is correct by reading it together with `./assets/pyq1_bg_reference.png` as a visual reference.
 - Crop the final runtime template `./assets/pyq1_bg.png` from `./assets/pyq1_full.png` by taking the bottom-left quarter of `./assets/pyq1_full.png`. Do not use the full icon as the runtime template.
 
 ### 2. Capture `pyq2`
@@ -98,7 +98,7 @@ The runner saves full-window screenshots with fixed names under `--output-dir`:
 - Inspect `capture_camera_button.png`.
 - Focus on the top-left toolbar area of the Moments window.
 - Extract the camera button and save as a temporary candidate crop.
-- Use `./assets/pyq2_bg_template.png` only as a visual reference while refining the crop.
+- Use `./assets/pyq2_bg_reference.png` only as a visual reference while refining the crop.
 - Run `imgtool find-component --polarity light` on the candidate crop to get the icon bounding box. Compute the bounding box center from the returned `x, y, w, h`.
 - Crop from the candidate crop using the bounding box center as the crop center. Keep no padding, but expand the crop as needed to avoid clipping any visible icon edge or curve.
 - Save the result as a temporary file, not directly as `pyq2_bg.png`.
@@ -115,11 +115,11 @@ The runner saves full-window screenshots with fixed names under `--output-dir`:
 - For `pyq3`, a full-image largest light-component pass on `capture_editor_anchor.png` is acceptable because the white editor dialog is expected to be the dominant light component in that screenshot.
 - Use visual inspection to verify that the extracted working image is the white editor dialog before continuing.
 - The upper half of that white editor dialog contains the placeholder text. Confirm that visually before narrowing the placeholder text region.
-- Use `./assets/pyq3_bg_template.png` only as a visual reference to narrow the placeholder text region. Do not overwrite the template file.
+- Use `./assets/pyq3_bg_reference.png` only as a visual reference to narrow the placeholder text region.
 - Use `imgtool find-text-bbox` on the narrowed region inside the white editor dialog to programmatically tighten the crop to the glyph bounds.
 - For `pyq3`, first narrow the placeholder region visually, then crop to the text glyph bounding box with zero or near-zero padding; only keep extra pixels when they are required to avoid clipping a glyph edge.
 - Save the final runtime template as `./assets/pyq3_bg.png`.
-- Use visual inspection to verify that `./assets/pyq3_bg.png` is correct by reading it together with `./assets/pyq3_bg_template.png` as a visual reference, ensure that no glyph is clipped, and there is no padding around the text.
+- Use visual inspection to verify that `./assets/pyq3_bg.png` is correct by reading it together with `./assets/pyq3_bg_reference.png` as a visual reference, ensure that no glyph is clipped, and there is no padding around the text.
 
 ### 4. Capture `pyq4`
 
@@ -128,9 +128,9 @@ The runner saves full-window screenshots with fixed names under `--output-dir`:
 - Inspect `capture_publish_button.png`.
 - Focus on the editor dialog's lower action-button area.
 - Extract the enabled publish button and save the final runtime template as `./assets/pyq4_bg.png`.
-- Use `./assets/pyq4_bg_template.png` only as a visual reference while refining the crop. Do not overwrite the template file.
+- Use `./assets/pyq4_bg_reference.png` only as a visual reference while refining the crop.
 - Use `imgtool find-component` on the narrowed button area when a programmatic edge-tightening pass is helpful.
-- Use visual inspection to verify that `pyq4_bg.png` is correct by reading it together with `./assets/pyq4_bg_template.png` as a visual reference. The button content should be visually centered without padding, and ensure the full button content, including the rounded corners, is not clipped.
+- Use visual inspection to verify that `pyq4_bg.png` is correct by reading it together with `./assets/pyq4_bg_reference.png` as a visual reference. The button content should be visually centered without padding, and ensure the full button content, including the rounded corners, is not clipped.
 
 ### 5. Restore Window Sizes
 
@@ -140,7 +140,7 @@ The runner saves full-window screenshots with fixed names under `--output-dir`:
 
 ## Cropping Rules
 
-- Preferred path: use visual inspection to identify the correct UI region and confirm the target state. Use the corresponding `*_bg_template.png` as a reference for the target's visual structure and color patterns. Within the narrowed region, use `imgtool` to find the target bounds and produce the final runtime crop.
+- Preferred path: use visual inspection to identify the correct UI region and confirm the target state. Use the corresponding `*_bg_reference.png` as a reference for the target's visual structure and color patterns. Within the narrowed region, use `imgtool` to find the target bounds and produce the final runtime crop.
 - Prefer `./assets/imgtool.exe`. If it is unavailable, fall back to `python ./scripts/imgtool.py`, or any other image tool available in the current environment.
 - Use `imgtool info --in <path>` to get the dimensions of any image.
 - Always narrow the area you inspect before refining the crop. Do not judge the target from the full-window screenshot when the expected UI area is already known.
@@ -158,7 +158,7 @@ The runner saves full-window screenshots with fixed names under `--output-dir`:
 
 ## Output Rules
 
-- Never overwrite `*_bg_template.png`.
+- Never overwrite `*_bg_reference.png`.
 - Overwrite `*_bg.png` only after the new crop is satisfactory.
 - Preserve `pyq1_full.png` after a successful `pyq1` refresh.
 - `pyq2`, `pyq3`, and `pyq4` do not need `*_full.png` artifacts.
