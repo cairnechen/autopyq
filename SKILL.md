@@ -1,5 +1,5 @@
 ---
-name: wechat-moments-publisher
+name: autopyq
 description: Use when the user wants to 发朋友圈、发布微信朋友圈、发一个带图的朋友圈、发图文朋友圈，或让 Agent 用本地图片路径和聊天内容准备并发布 WeChat Moments/朋友圈 through the local Windows runner. Also use when the user needs to refresh or recapture the pyq1-pyq4 template images used by the local Moments runners.
 ---
 
@@ -39,14 +39,14 @@ Use this skill when the user wants to publish text, images, or a mixed post to W
 Use this when the host shell is PowerShell.
 
 ```powershell
-$skillRoot = 'C:\Users\<username>\.agents\skills\wechat-moments-publisher'
+$skillRoot = 'C:\Users\<username>\.agents\skills\autopyq'
 $assetsDir = Join-Path $skillRoot 'assets'
 $textRunner = Join-Path $assetsDir 'wechat_moments_publish.exe'
 $imageRunner = Join-Path $assetsDir 'wechat_moments_publish_images.exe'
 $config = Join-Path $assetsDir 'config.ini'
 ```
 
-- If the host app installs skills elsewhere, substitute the actual installed root, for example `C:\Users\<username>\.claude\skills\wechat-moments-publisher`.
+- If the host app installs skills elsewhere, substitute the actual installed root, for example `C:\Users\<username>\.claude\skills\autopyq`.
 - Text post:
 
 ```powershell
@@ -91,14 +91,14 @@ $logFile = Join-Path $stagingDir 'log.txt'
 Use this when the host shell is bash.
 
 ```bash
-skill_root='/c/Users/<username>/.agents/skills/wechat-moments-publisher'
+skill_root='/c/Users/<username>/.agents/skills/autopyq'
 assets_dir="$skill_root/assets"
 text_runner_win="$(cygpath -w "$assets_dir/wechat_moments_publish.exe")"
 image_runner_win="$(cygpath -w "$assets_dir/wechat_moments_publish_images.exe")"
 config_win="$(cygpath -w "$assets_dir/config.ini")"
 ```
 
-- If the host app installs skills elsewhere, substitute the actual installed root, for example `/c/Users/<username>/.claude/skills/wechat-moments-publisher`.
+- If the host app installs skills elsewhere, substitute the actual installed root, for example `/c/Users/<username>/.claude/skills/autopyq`.
 - Text post:
 
 ```bash

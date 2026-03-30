@@ -1,0 +1,8 @@
+# Claude Code local settings
+.claude/settings.local.json
+
+# Template capture temp files
+.tmp_template_capture/
+
+# Auto memory
+.claude/projects/
