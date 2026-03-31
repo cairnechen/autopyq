@@ -254,6 +254,9 @@ BuildWorkflow(config, configDir, target) {
 
     switch target {
         case "moments_button":
+        {
+            ; Bootstrap capture: allow pyq1 to be recaptured even when the runtime template is missing.
+        }
         case "camera_button":
             workflow["moments_button"] := BuildAction(config, configDir, "moments_button")
         case "editor_anchor":

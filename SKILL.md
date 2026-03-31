@@ -11,7 +11,7 @@ Use this skill when the user wants to publish text, images, or a mixed post to W
 
 - Never publish without an explicit confirmation in the current conversation.
 - Tell the user to keep WeChat visible and avoid moving the mouse or keyboard during execution.
-- Verify that the default templates all exist. If any template is missing, stop and guide the user through the template-capture flow in [`./references/template-capture-guide.md`](./references/template-capture-guide.md) before attempting to publish.
+- Verify that the default templates all exist. If any template is missing, stop and switch to template capture.
 - For text posts, stage the final text into `Pictures\Moments\<run-id>\text.txt` and publish through `--text-file`.
 - When the user wants to publish images, only accept explicit file paths. Do not accept directories, wildcards, or raw chat attachments.
 - Reject image batches larger than 9 files before launching the runner.
@@ -33,7 +33,6 @@ Use this skill when the user wants to publish text, images, or a mixed post to W
 
 1. Resolve the installed skill root and build absolute asset paths.
 2. Resolve the post content from the conversation or another user-specified source.
-3. Ask for one explicit confirmation that includes the text summary and, when present, the image count.
 
 ### PowerShell Template
 

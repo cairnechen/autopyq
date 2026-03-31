@@ -7,3 +7,6 @@ AGENTS.md
 
 # Auto memory
 .claude/projects/
+
+# Local tools
+.tool/
